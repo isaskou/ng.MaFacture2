@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class HomeBannerComponent implements OnInit {
 
+  // tslint:disable-next-line: variable-name
   constructor(private _router: Router) { }
 
   ngOnInit(): void {
