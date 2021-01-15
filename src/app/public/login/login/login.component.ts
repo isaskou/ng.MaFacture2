@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
+import { UserLoginService } from 'src/app/services/userLogin.service';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +13,14 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   errorMsg: string;
 
-  public get showIsConnected(): boolean {
-    return this.userService.userIsConnected();
-  }
+  // public get showIsConnected(): boolean {
+  //   return this.userService.userIsConnected();
+  // }
 
   constructor(
     private router: Router,
     private builder: FormBuilder,
-    public userService: UserService
+    private user: UserLoginService
   ) { }
 
   ngOnInit(): void {
@@ -31,12 +31,12 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    if (this.userService.currentUser !== null) {
-      if (this.loginForm.get('email').value === this.userService.currentUser.email
-        && this.loginForm.get('pwd').value === this.userService.currentUser.password) {
-        const user = this.userService.currentUser;
+    if (this.user.currentUser !== null) {
+      if (this.loginForm.get('email').value === this.user.currentUser.email
+        && this.loginForm.get('pwd').value === this.user.currentUser.password) {
+        const user = this.user.currentUser;
         user.isConnected = true;
-        localStorage.setItem('user', JSON.stringify(user));
+        sessionStorage.setItem('user', JSON.stringify(user));
         this.errorMsg = '';
         // tslint:disable-next-line: no-unused-expression
         this.router.navigate(['dashboard']).then;
@@ -47,10 +47,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  logout(): void {
-    const user = this.userService.currentUser;
-    user.isConnected = false;
-    localStorage.setItem('user', JSON.stringify(user));
-  }
+  // logout(): void {
+  //   const user = this.userService.currentUser;
+  //   user.isConnected = false;
+  //   sessionStorage.setItem('user', JSON.stringify(user));
+  // }
 
 }

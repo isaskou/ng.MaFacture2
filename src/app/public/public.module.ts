@@ -4,6 +4,7 @@ import { PublicRoutingModule } from './public-routing.module';
 import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module';
 import { SharedModule } from '../shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule,
     PublicRoutingModule,
     HomeModule,
-    LoginModule
+    LoginModule,
+    HttpClientModule
   ]
 })
 export class PublicModule { }
